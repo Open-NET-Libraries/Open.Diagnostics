@@ -11,6 +11,7 @@ Part of the "Open" set of libraries.</Description>
     <Product />
     <Version>1.0.1</Version>
     <PackageLicenseUrl>https://github.com/electricessence/Open/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>dotnet, dotnetcore, cs, diagnostics, debug, extensions</PackageTags>
   </PropertyGroup>
 
 </Project>

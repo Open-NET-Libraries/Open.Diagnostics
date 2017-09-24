@@ -10,8 +10,12 @@ Part of the "Open" set of libraries.</Description>
     <Company />
     <Product />
     <Version>1.0.1</Version>
-    <PackageLicenseUrl>https://github.com/electricessence/Open/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/electricessence/Open.Diagnostics/blob/master/LISCENSE.md</PackageLicenseUrl>
     <PackageTags>dotnet, dotnetcore, cs, diagnostics, debug, extensions</PackageTags>
+    <Copyright>https://github.com/electricessence/Open.Diagnostics/blob/master/LISCENSE.md</Copyright>
+    <PackageProjectUrl>https://github.com/electricessence/Open.Diagnostics/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/electricessence/Open.Diagnostics/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
 </Project>

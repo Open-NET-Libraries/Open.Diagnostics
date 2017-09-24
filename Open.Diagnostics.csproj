@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>Diagnostic extensions and utilities.
+
+Part of the "Open" set of libraries.</Description>
+    <Authors>electricessence</Authors>
+    <Company />
+    <Product />
+    <Version>1.0.1</Version>
+    <PackageLicenseUrl>https://github.com/electricessence/Open/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+</Project>

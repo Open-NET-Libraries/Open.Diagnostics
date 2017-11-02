@@ -19,4 +19,11 @@ Part of the "Open" set of libraries.</Description>
     <PackageReleaseNotes>Added performance benchmarking classes.</PackageReleaseNotes>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove=".git" />
+    <None Remove=".gitignore" />
+    <None Remove="LISCENSE.md" />
+    <None Remove="README.md" />
+  </ItemGroup>
+
 </Project>

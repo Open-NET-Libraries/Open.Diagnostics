@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>Diagnostic extensions and utilities.
 
@@ -9,14 +9,14 @@ Part of the "Open" set of libraries.</Description>
     <Authors>electricessence</Authors>
     <Company />
     <Product />
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <PackageLicenseUrl>https://github.com/electricessence/Open.Diagnostics/blob/master/LISCENSE.md</PackageLicenseUrl>
     <PackageTags>dotnet, dotnetcore, cs, diagnostics, debug, extensions</PackageTags>
     <Copyright>https://github.com/electricessence/Open.Diagnostics/blob/master/LISCENSE.md</Copyright>
     <PackageProjectUrl>https://github.com/electricessence/Open.Diagnostics/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/electricessence/Open.Diagnostics/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Added performance benchmarking classes.</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated to .NET Standard for compatability.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

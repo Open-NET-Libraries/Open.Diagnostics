@@ -7,7 +7,7 @@ namespace Open.Diagnostics
 {
 	public abstract class BenchmarkBase<TBenchParam>
 	{
-		public readonly uint TestSize; 
+		public readonly uint TestSize;
 		public readonly uint RepeatCount; // Number of times to repeat the test from scratch.
 		protected readonly TBenchParam Param;
 
@@ -52,7 +52,7 @@ namespace Open.Diagnostics
 					.GroupBy(k => k.Item1) // Group by their 'id' (ordinal).
 					.Select(g => Sum(g)) // Sum/merge those groups.
 					.OrderBy(r => r.Item1) // Order by their ordinal.
-					.Select(r=>r.Item2) // Select the actual result.
+					.Select(r => r.Item2) // Select the actual result.
 					.ToArray() // And done.
 				);
 			}
@@ -64,7 +64,7 @@ namespace Open.Diagnostics
 			if (first == null) return null;
 
 			var i = first.Item1;
-			if(results.Skip(1).Any(r=>r.Item1!=i))
+			if (results.Skip(1).Any(r => r.Item1 != i))
 				throw new InvalidOperationException("Summing unmatched TimeResults.");
 
 			return Tuple.Create(i, results.Select(s => s.Item2).Sum());

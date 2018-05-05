@@ -7,7 +7,7 @@ namespace Open.Diagnostics
 	{
 		public static void WriteToDebug(this Exception ex, bool findInner = false)
 		{
-			if(ex==null)
+			if (ex == null)
 				throw new NullReferenceException();
 
 			if (findInner)

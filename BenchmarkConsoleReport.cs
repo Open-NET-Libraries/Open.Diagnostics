@@ -14,7 +14,7 @@ namespace Open.Diagnostics
 		TextWriter Output;
 		Func<uint, uint, TBenchParam, TimedResult[]> BenchmarkFunction;
 
-		public BenchmarkConsoleReport(uint iterations, TextWriter output, Func<uint, uint, TBenchParam, TimedResult[]> benchmark):this(iterations, benchmark)
+		public BenchmarkConsoleReport(uint iterations, TextWriter output, Func<uint, uint, TBenchParam, TimedResult[]> benchmark) : this(iterations, benchmark)
 		{
 			Output = output;
 		}
@@ -27,7 +27,7 @@ namespace Open.Diagnostics
 		public BenchmarkConsoleReport(uint iterations, Func<uint, uint, TBenchParam, TimedResult[]> benchmark)
 		{
 			if (iterations < 10)
-				throw new ArgumentOutOfRangeException("iterations", iterations, "Need to have a significant number of iterations to be certain of validity.");
+				throw new ArgumentOutOfRangeException(nameof(iterations), iterations, "Need to have a significant number of iterations to be certain of validity.");
 			Iterations = iterations;
 			BenchmarkFunction = benchmark;
 		}
@@ -127,7 +127,7 @@ namespace Open.Diagnostics
 
 		protected virtual TimedResult[] BenchmarkResults(uint count, uint repeat, TBenchParam param)
 		{
-			return BenchmarkFunction(count,repeat,param);
+			return BenchmarkFunction(count, repeat, param);
 		}
 
 		protected TimedResult[] OutputResults(uint count, uint repeat, TBenchParam param, bool consoleOnly = false)
@@ -175,7 +175,7 @@ namespace Open.Diagnostics
 
 		public void Pretest(uint count, uint repeat)
 		{
-			foreach(var bench in _benchmarks)
+			foreach (var bench in _benchmarks)
 				BenchmarkResults(count, repeat, bench.Item2(count));
 		}
 

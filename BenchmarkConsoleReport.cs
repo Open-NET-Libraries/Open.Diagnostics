@@ -184,7 +184,7 @@ namespace Open.Diagnostics
 			var data = new List<string>();
 			var repeat = multiple * Iterations / count;
 			Console.ForegroundColor = ConsoleColor.Cyan;
-			var batch = String.Format("Repeat {1:g} for size {0:g}", count, repeat);
+			var batch = string.Format("Repeat {1:g} for size {0:g}", count, repeat);
 			WriteLine(batch);
 			Separator();
 			Console.ResetColor();

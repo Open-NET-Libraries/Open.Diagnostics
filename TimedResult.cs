@@ -22,7 +22,7 @@ namespace Open.Diagnostics
 
 		public override string ToString()
 		{
-			return String.Format("{1} {0}", Label, Duration);
+			return string.Format("{1} {0}", Label, Duration);
 		}
 
 		public static TimeSpan Measure(Action action)
@@ -49,7 +49,7 @@ namespace Open.Diagnostics
 
 		public static T Measure<T>(out TimedResult measurement, string label, Func<T> action)
 		{
-			var result = Measure(out TimeSpan duration, action);
+			var result = Measure(out var duration, action);
 			measurement = new TimedResult(label, duration);
 			return result;
 		}

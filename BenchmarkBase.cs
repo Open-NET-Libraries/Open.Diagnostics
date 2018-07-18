@@ -20,7 +20,7 @@ namespace Open.Diagnostics
 
 		public IEnumerable<Tuple<int, TimedResult>> TestOnce()
 		{
-			int index = 0;
+			var index = 0;
 			var total = TimeSpan.Zero;
 			foreach (var r in TestOnceInternal())
 			{

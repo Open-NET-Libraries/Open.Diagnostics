@@ -11,8 +11,8 @@ namespace Open.Diagnostics
 	{
 
 		protected readonly uint Iterations;
-		TextWriter Output;
-		Func<uint, uint, TBenchParam, TimedResult[]> BenchmarkFunction;
+		readonly TextWriter Output;
+		readonly Func<uint, uint, TBenchParam, TimedResult[]> BenchmarkFunction;
 
 		public BenchmarkConsoleReport(uint iterations, TextWriter output, Func<uint, uint, TBenchParam, TimedResult[]> benchmark) : this(iterations, benchmark)
 		{
@@ -33,7 +33,7 @@ namespace Open.Diagnostics
 		}
 
 		string[] _resultLabels;
-		List<string[]> _results = new List<string[]>();
+		readonly List<string[]> _results = new List<string[]>();
 		public string[][] Results => _results.ToArray();
 		public string[] ResultLabels => _resultLabels.ToArray();
 
@@ -68,6 +68,7 @@ namespace Open.Diagnostics
 			Console.WriteLine(value);
 		}
 
+		// ReSharper disable once StaticMemberInGenericType
 		static readonly Regex TimeSpanRegex = new Regex(@"((?:00:)+ (?:0\B)?) ([0.]*) (\S*)", RegexOptions.IgnorePatternWhitespace);
 
 		protected void OutputResult(TimeSpan result, bool consoleOnly = false)
@@ -167,7 +168,7 @@ namespace Open.Diagnostics
 			return Tuple.Create(header, results);
 		}
 
-		List<Tuple<string, Func<uint, TBenchParam>>> _benchmarks = new List<Tuple<string, Func<uint, TBenchParam>>>();
+		readonly List<Tuple<string, Func<uint, TBenchParam>>> _benchmarks = new List<Tuple<string, Func<uint, TBenchParam>>>();
 		public void AddBenchmark(string name, Func<uint, TBenchParam> param)
 		{
 			_benchmarks.Add(Tuple.Create(name, param));
@@ -181,7 +182,6 @@ namespace Open.Diagnostics
 
 		public void Test(uint count, uint multiple = 1)
 		{
-			var data = new List<string>();
 			var repeat = multiple * Iterations / count;
 			Console.ForegroundColor = ConsoleColor.Cyan;
 			var batch = string.Format("Repeat {1:g} for size {0:g}", count, repeat);

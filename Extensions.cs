@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+
+#if DEBUG
 using System.Diagnostics;
+#endif
 
 namespace Open.Diagnostics
 {
 	public static class Extensions
 	{
+		[SuppressMessage("ReSharper", "UnusedParameter.Global")]
 		public static void WriteToDebug(this Exception ex, bool findInner = false)
 		{
+#if DEBUG
 			if (ex == null)
 				throw new NullReferenceException();
 
@@ -17,10 +23,11 @@ namespace Open.Diagnostics
 				while (ex.InnerException != null && message.EndsWith(seeinner))
 				{
 					ex = ex.InnerException;
-					message.Replace(seeinner, ex.Message.Trim());
+					message = message.Replace(seeinner, ex.Message.Trim());
 				}
 			}
 			Debug.WriteLine("=== EXCEPTION ===\n" + ex.ToString() + "\n=============\n");
+#endif
 		}
 	}
 }

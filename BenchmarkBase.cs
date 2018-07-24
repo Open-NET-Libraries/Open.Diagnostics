@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 
 namespace Open.Diagnostics
 {
+	[SuppressMessage("ReSharper", "NotAccessedField.Global")]
 	public abstract class BenchmarkBase<TBenchParam>
 	{
 		public readonly uint TestSize;
 		public readonly uint RepeatCount; // Number of times to repeat the test from scratch.
 		protected readonly TBenchParam Param;
 
-		public BenchmarkBase(uint size, uint repeat, TBenchParam param)
+		protected BenchmarkBase(uint size, uint repeat, TBenchParam param)
 		{
 			TestSize = size;
 			RepeatCount = repeat;
@@ -28,7 +30,7 @@ namespace Open.Diagnostics
 				yield return Tuple.Create(index++, r);
 			}
 
-			yield return Tuple.Create(index++, new TimedResult("TOTAL", total));
+			yield return Tuple.Create(index, new TimedResult("TOTAL", total));
 		}
 
 		protected abstract IEnumerable<TimedResult> TestOnceInternal();
@@ -50,7 +52,7 @@ namespace Open.Diagnostics
 					TestRepeated()
 					.SelectMany(s => s) // Get all results.
 					.GroupBy(k => k.Item1) // Group by their 'id' (ordinal).
-					.Select(g => Sum(g)) // Sum/merge those groups.
+					.Select(Sum) // Sum/merge those groups.
 					.OrderBy(r => r.Item1) // Order by their ordinal.
 					.Select(r => r.Item2) // Select the actual result.
 					.ToArray() // And done.
@@ -60,14 +62,13 @@ namespace Open.Diagnostics
 
 		static Tuple<int, TimedResult> Sum(IEnumerable<Tuple<int, TimedResult>> results)
 		{
-			var first = results.FirstOrDefault();
-			if (first == null) return null;
-
-			var i = first.Item1;
-			if (results.Skip(1).Any(r => r.Item1 != i))
+			var a = results.ToArray();
+			if (a.Length == 0) return null;
+			var i = a[0].Item1;
+			if (a.Skip(1).Any(r => r.Item1 != i))
 				throw new InvalidOperationException("Summing unmatched TimeResults.");
 
-			return Tuple.Create(i, results.Select(s => s.Item2).Sum());
+			return Tuple.Create(i, a.Select(s => s.Item2).Sum());
 		}
 
 	}

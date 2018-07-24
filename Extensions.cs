@@ -26,7 +26,7 @@ namespace Open.Diagnostics
 					message = message.Replace(seeinner, ex.Message.Trim());
 				}
 			}
-			Debug.WriteLine("=== EXCEPTION ===\n" + ex.ToString() + "\n=============\n");
+			Debug.WriteLine("=== EXCEPTION ===\n" + ex + "\n=============\n");
 #endif
 		}
 	}

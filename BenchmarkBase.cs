@@ -20,22 +20,22 @@ namespace Open.Diagnostics
 			Param = param;
 		}
 
-		public IEnumerable<Tuple<int, TimedResult>> TestOnce()
+		public IEnumerable<(int Index, TimedResult Result)> TestOnce()
 		{
 			var index = 0;
 			var total = TimeSpan.Zero;
 			foreach (var r in TestOnceInternal())
 			{
 				total += r.Duration;
-				yield return Tuple.Create(index++, r);
+				yield return (index++, r);
 			}
 
-			yield return Tuple.Create(index, new TimedResult("TOTAL", total));
+			yield return (index, new TimedResult("TOTAL", total));
 		}
 
 		protected abstract IEnumerable<TimedResult> TestOnceInternal();
 
-		public IEnumerable<IEnumerable<Tuple<int, TimedResult>>> TestRepeated()
+		public IEnumerable<IEnumerable<(int Index, TimedResult Result)>> TestRepeated()
 		{
 			for (var i = 0; i < RepeatCount; i++)
 			{
@@ -51,24 +51,25 @@ namespace Open.Diagnostics
 				return LazyInitializer.EnsureInitialized(ref _result, () =>
 					TestRepeated()
 					.SelectMany(s => s) // Get all results.
-					.GroupBy(k => k.Item1) // Group by their 'id' (ordinal).
+					.GroupBy(k => k.Index) // Group by their 'id' (ordinal).
 					.Select(Sum) // Sum/merge those groups.
-					.OrderBy(r => r.Item1) // Order by their ordinal.
-					.Select(r => r.Item2) // Select the actual result.
+					.OrderBy(r => r.Index) // Order by their ordinal.
+					.Select(r => r.Result) // Select the actual result.
 					.ToArray() // And done.
 				);
 			}
 		}
 
-		static Tuple<int, TimedResult> Sum(IEnumerable<Tuple<int, TimedResult>> results)
+		static (int Index, TimedResult Result) Sum(IEnumerable<(int Index, TimedResult Result)> results)
 		{
 			var a = results.ToArray();
-			if (a.Length == 0) return null;
-			var i = a[0].Item1;
-			if (a.Skip(1).Any(r => r.Item1 != i))
+			if (a.Length == 0) return (-1, default);
+
+			var i = a[0].Index;
+			if (a.Skip(1).Any(r => r.Index != i))
 				throw new InvalidOperationException("Summing unmatched TimeResults.");
 
-			return Tuple.Create(i, a.Select(s => s.Item2).Sum());
+			return (i, a.Select(s => s.Result).Sum());
 		}
 
 	}

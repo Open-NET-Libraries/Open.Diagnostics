@@ -6,7 +6,6 @@ using System.Threading;
 
 namespace Open.Diagnostics
 {
-	[SuppressMessage("ReSharper", "NotAccessedField.Global")]
 	public abstract class BenchmarkBase<TBenchParam>
 	{
 		public readonly uint TestSize;

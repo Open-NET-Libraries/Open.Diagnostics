@@ -9,7 +9,6 @@ namespace Open.Diagnostics
 {
 	public static class Extensions
 	{
-		[SuppressMessage("ReSharper", "UnusedParameter.Global")]
 		public static void WriteToDebug(this Exception ex, bool findInner = false)
 		{
 #if DEBUG

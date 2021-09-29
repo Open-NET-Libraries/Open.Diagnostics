@@ -33,7 +33,7 @@ namespace Open.Diagnostics
 		}
 
 		string[] _resultLabels;
-		readonly List<string[]> _results = new List<string[]>();
+		readonly List<string[]> _results = new();
 		public string[][] Results => _results.ToArray();
 		public string[] ResultLabels => _resultLabels.ToArray();
 
@@ -69,7 +69,7 @@ namespace Open.Diagnostics
 		}
 
 		// ReSharper disable once StaticMemberInGenericType
-		static readonly Regex TimeSpanRegex = new Regex(@"((?:00:)+ (?:0\B)?) ([0.]*) (\S*)", RegexOptions.IgnorePatternWhitespace);
+		static readonly Regex TimeSpanRegex = new(@"((?:00:)+ (?:0\B)?) ([0.]*) (\S*)", RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
 		protected void OutputResult(TimeSpan result, bool consoleOnly = false)
 		{
@@ -168,7 +168,7 @@ namespace Open.Diagnostics
 			return Tuple.Create(header, results);
 		}
 
-		readonly List<Tuple<string, Func<uint, TBenchParam>>> _benchmarks = new List<Tuple<string, Func<uint, TBenchParam>>>();
+		readonly List<Tuple<string, Func<uint, TBenchParam>>> _benchmarks = new();
 		public void AddBenchmark(string name, Func<uint, TBenchParam> param)
 		{
 			_benchmarks.Add(Tuple.Create(name, param));
